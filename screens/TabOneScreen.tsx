@@ -23,7 +23,7 @@ export default function TabOneScreen() {
 				'user-read-private',
 			],
 			usePKCE: false,
-			redirectUri: 'exp://192.168.100.14:19000',
+			redirectUri: API_CONFIG.redirectUri,
 		},
 		{
 			authorizationEndpoint: 'https://accounts.spotify.com/authorize',
