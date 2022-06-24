@@ -1,22 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import React from 'react';
+import { Provider } from 'react-redux';
+import FirstComponent from './FirstRenderedComponent';
+import store from './store/store';
+// import store from './store/store';
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  return (
+    <Provider store={store}>
+      <FirstComponent />
+    </Provider>
+  );
+}
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
-  }
+{
+  /* {a === 'apikey123' ? (
+  <SafeAreaProvider>
+    <Navigation colorScheme={colorScheme} />
+    <StatusBar />
+  </SafeAreaProvider>
+) : (
+  <SafeAreaProvider>
+    <TabOneScreen />
+  </SafeAreaProvider>
+)} */
 }
