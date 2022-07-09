@@ -11,44 +11,45 @@ import { LoginScreen } from './screens/LoginScreen';
 import { setAccessToken } from './store/reducers/login.reducer';
 
 export const FirstComponent = () => {
-	const dispatch = useDispatch();
-	const access_token = useSelector((state: any) => state.login.access_token);
-	const isLoadingComplete = useCachedResources();
-	const colorScheme = useColorScheme();
-	const [a, setA] = useState('');
+  const dispatch = useDispatch();
+  const access_token = useSelector((state: any) => state.login.access_token);
+  const isLoadingComplete = useCachedResources();
+  const colorScheme = useColorScheme();
+  const [a, setA] = useState('');
 
-	const getData = async () => {
-		try {
-			const value = await AsyncStorage.getItem('api_key');
-			if (typeof value === 'string') {
-				if (access_token === '') {
-					dispatch(setAccessToken(value));
-				}
-				setA(value);
-			}
-		} catch (e) {}
-	};
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('api_key');
+      if (typeof value === 'string') {
+        if (access_token === '') {
+          dispatch(setAccessToken(value));
+        }
+        setA(value);
+      }
+    } catch (e) {}
+  };
 
-	useEffect(() => {
-		getData();
-	}, [access_token]);
+  useEffect(() => {
+    getData();
+  }, [access_token]);
 
-	if (!isLoadingComplete) {
-		return null;
-	} else {
-		return (
-			<SafeAreaProvider>
-				{a === '' ? (
-					<LoginScreen />
-				) : (
-					<SafeAreaProvider>
-						<Navigation colorScheme={colorScheme} />
-						<StatusBar />
-					</SafeAreaProvider>
-				)}
-			</SafeAreaProvider>
-		);
-	}
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
+      <SafeAreaProvider>
+        {a === '' ? (
+          <LoginScreen />
+        ) : (
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        )}
+        <StatusBar />
+      </SafeAreaProvider>
+    );
+  }
 };
 
 // remove from asyncstorage-
